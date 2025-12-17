@@ -34,13 +34,13 @@ export default function About() {
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-600 rounded-2xl transform rotate-6"></div>
-              <div className="relative bg-gray-200 dark:bg-gray-700 rounded-2xl overflow-hidden h-96">
+              <div className="relative bg-gray-200 dark:bg-gray-700 rounded-2xl overflow-hidden h-96 flex items-center justify-center">
                 {!imageError ? (
                   <Image
                     src="/me.jpeg"
                     alt="Jithin John - Full Stack Developer"
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     onError={() => setImageError(true)}
                   />
