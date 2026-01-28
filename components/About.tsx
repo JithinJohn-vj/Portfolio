@@ -34,19 +34,16 @@ export default function About() {
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-600 rounded-2xl transform rotate-6"></div>
-              <div className="relative bg-gray-200 dark:bg-gray-700 rounded-2xl overflow-hidden aspect-[3/4] w-full">
+              <div className="relative bg-gray-200 dark:bg-gray-700 rounded-2xl overflow-hidden h-96 flex items-center justify-center">
                 {!imageError ? (
-                  <div className="w-full h-full p-4 flex items-center justify-center">
-                    <Image
-                      src="/me.jpeg"
-                      alt="Jithin John - Full Stack Developer"
-                      width={400}
-                      height={600}
-                      className="object-contain w-full h-full max-w-full max-h-full"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      onError={() => setImageError(true)}
-                    />
-                  </div>
+                  <Image
+                    src="/me.jpeg"
+                    alt="Jithin John - Full Stack Developer"
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    onError={() => setImageError(true)}
+                  />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
                     <p className="text-gray-500 dark:text-gray-400 text-center px-4">
