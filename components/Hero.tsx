@@ -77,8 +77,8 @@ export default function Hero() {
               Get In Touch
             </a>
             <a
-              href="/Jithin_John_CV.pdf"
-              download="Jithin_John_CV.pdf"
+              href="/Jithin_Fullstack_Cv.pdf"
+              download="Jithin_Fullstack_Cv.pdf"
               className="px-8 py-3 bg-gray-800 dark:bg-gray-700 text-white rounded-lg font-semibold hover:bg-gray-900 dark:hover:bg-gray-600 transition-colors shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
             >
               <Download className="w-5 h-5" />
