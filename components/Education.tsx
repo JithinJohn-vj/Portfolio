@@ -68,9 +68,6 @@ export default function Education() {
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                     {edu.degree}
                   </h3>
-                  {edu.status === 'Incomplete' && (
-                    <span className="text-xs text-gray-500 dark:text-gray-400">({edu.status})</span>
-                  )}
                 </div>
               </div>
 
