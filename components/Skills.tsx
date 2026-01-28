@@ -116,32 +116,38 @@ export default function Skills() {
                         {skill.level}%
                       </span>
                     </div>
-                    <div className="flex gap-1.5">
-                      {Array.from({ length: 10 }).map((_, i) => {
-                        const filled = Math.round((skill.level / 100) * 10)
-                        const isFilled = i < filled
-                        return (
-                          <motion.span
-                            key={i}
-                            initial={{ opacity: 0.3, scaleX: 0.6 }}
-                            whileInView={{ opacity: 1, scaleX: 1 }}
-                            viewport={{ once: true }}
-                            transition={{
-                              duration: 0.35,
-                              delay:
-                                categoryIndex * 0.12 +
-                                skillIndex * 0.05 +
-                                i * 0.02,
-                            }}
-                            className={[
-                              'h-2.5 flex-1 rounded-full origin-left',
-                              isFilled
-                                ? 'bg-gradient-to-r from-primary-600 to-primary-400 shadow-[0_0_0_1px_rgba(59,130,246,0.12)]'
-                                : 'bg-gray-200 dark:bg-gray-700',
-                            ].join(' ')}
-                          />
-                        )
-                      })}
+                    <div className="relative">
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          viewport={{ once: true }}
+                          transition={{
+                            duration: 0.9,
+                            ease: 'easeOut',
+                            delay: categoryIndex * 0.18 + skillIndex * 0.08,
+                          }}
+                          className="h-2.5 rounded-full bg-gradient-to-r from-primary-600 to-primary-400"
+                        />
+                      </div>
+
+                      {/* indicator dot */}
+                      <motion.div
+                        initial={{ left: '0%' }}
+                        whileInView={{ left: `${skill.level}%` }}
+                        viewport={{ once: true }}
+                        transition={{
+                          duration: 0.9,
+                          ease: 'easeOut',
+                          delay: categoryIndex * 0.18 + skillIndex * 0.08,
+                        }}
+                        className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
+                        style={{ pointerEvents: 'none' }}
+                      >
+                        <div className="w-3.5 h-3.5 rounded-full bg-white dark:bg-gray-900 shadow-[0_0_0_2px_rgba(59,130,246,0.35)]">
+                          <div className="w-full h-full rounded-full bg-gradient-to-r from-primary-600 to-primary-400 scale-[0.55]" />
+                        </div>
+                      </motion.div>
                     </div>
                   </div>
                 ))}
