@@ -1,74 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Code2 } from 'lucide-react'
-import type { ComponentType } from 'react'
-import {
-  SiReact,
-  SiNextdotjs,
-  SiTypescript,
-  SiJavascript,
-  SiTailwindcss,
-  SiPython,
-  SiFastapi,
-  SiDjango,
-  SiFlask,
-  SiGraphql,
-  SiDocker,
-  SiKubernetes,
-  SiGooglecloud,
-  SiAmazonwebservices,
-  SiTerraform,
-  SiGithubactions,
-  SiPostgresql,
-  SiMongodb,
-  SiMysql,
-  SiSqlite,
-  SiScikitlearn,
-  SiOpenai,
-  SiGit,
-  SiJest,
-  SiLinux,
-  SiFigma,
-  SiVscodium,
-} from 'react-icons/si'
-
-type IconType = ComponentType<{ className?: string }>
-
-const skillIconMap: Record<string, IconType> = {
-  'React.js': SiReact,
-  'Next.js': SiNextdotjs,
-  TypeScript: SiTypescript,
-  JavaScript: SiJavascript,
-  'Tailwind CSS': SiTailwindcss,
-
-  Python: SiPython,
-  FastAPI: SiFastapi,
-  Django: SiDjango,
-  Flask: SiFlask,
-  GraphQL: SiGraphql,
-
-  Docker: SiDocker,
-  Kubernetes: SiKubernetes,
-  GCP: SiGooglecloud,
-  AWS: SiAmazonwebservices,
-  Terraform: SiTerraform,
-  'GitHub Actions': SiGithubactions,
-
-  PostgreSQL: SiPostgresql,
-  MongoDB: SiMongodb,
-  MySQL: SiMysql,
-  SQLite: SiSqlite,
-
-  'Scikit-learn': SiScikitlearn,
-  'OpenAI API': SiOpenai,
-
-  'Git/GitHub': SiGit,
-  'Testing (Jest)': SiJest,
-  'Linux/CLI': SiLinux,
-  'Figma (handoff)': SiFigma,
-  VSCode: SiVscodium,
-}
+import { TechBadge } from './TechBadge'
 
 const skillCategories = [
   {
@@ -175,31 +108,40 @@ export default function Skills() {
                 {category.skills.map((skill, skillIndex) => (
                   <div key={skill.name}>
                     <div className="flex justify-between mb-2">
-                      <span className="text-gray-700 dark:text-gray-300 font-medium flex items-center gap-2 min-w-0">
-                        <span className="w-5 h-5 flex items-center justify-center shrink-0 text-gray-600 dark:text-gray-300">
-                          {(() => {
-                            const Icon = skillIconMap[skill.name]
-                            if (!Icon) return <Code2 className="w-4 h-4" aria-hidden="true" />
-                            return <Icon className="w-4 h-4" aria-hidden="true" />
-                          })()}
-                        </span>
-                        <span className="truncate">{skill.name}</span>
-                      </span>
+                      <TechBadge
+                        label={skill.name}
+                        className="bg-transparent dark:bg-transparent border-0 px-0 py-0 text-sm font-medium"
+                      />
                       <span className="text-gray-500 dark:text-gray-400 text-sm">
                         {skill.level}%
                       </span>
                     </div>
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{
-                          duration: 1,
-                          delay: categoryIndex * 0.2 + skillIndex * 0.1,
-                        }}
-                        className="bg-gradient-to-r from-primary-600 to-primary-400 h-2.5 rounded-full"
-                      ></motion.div>
+                    <div className="flex gap-1.5">
+                      {Array.from({ length: 10 }).map((_, i) => {
+                        const filled = Math.round((skill.level / 100) * 10)
+                        const isFilled = i < filled
+                        return (
+                          <motion.span
+                            key={i}
+                            initial={{ opacity: 0.3, scaleX: 0.6 }}
+                            whileInView={{ opacity: 1, scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{
+                              duration: 0.35,
+                              delay:
+                                categoryIndex * 0.12 +
+                                skillIndex * 0.05 +
+                                i * 0.02,
+                            }}
+                            className={[
+                              'h-2.5 flex-1 rounded-full origin-left',
+                              isFilled
+                                ? 'bg-gradient-to-r from-primary-600 to-primary-400 shadow-[0_0_0_1px_rgba(59,130,246,0.12)]'
+                                : 'bg-gray-200 dark:bg-gray-700',
+                            ].join(' ')}
+                          />
+                        )
+                      })}
                     </div>
                   </div>
                 ))}

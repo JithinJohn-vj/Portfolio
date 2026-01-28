@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { MapPin, Calendar, ExternalLink } from 'lucide-react'
+import { TechBadge } from './TechBadge'
 
 const experiences = [
   {
@@ -141,12 +142,10 @@ export default function Experience() {
 
               <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
                 {exp.technologies.map((tech) => (
-                  <span
+                  <TechBadge
                     key={tech}
-                    className="px-3 py-1 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-700"
-                  >
-                    {tech}
-                  </span>
+                    label={tech}
+                  />
                 ))}
               </div>
             </motion.div>
