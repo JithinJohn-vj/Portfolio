@@ -21,10 +21,13 @@ import {
   SiMysql,
   SiNextdotjs,
   SiOpenai,
+  SiOllama,
   SiPostgresql,
   SiPython,
   SiReact,
+  SiRazorpay,
   SiScikitlearn,
+  SiShadcnui,
   SiSqlite,
   SiTailwindcss,
   SiTerraform,
@@ -49,6 +52,8 @@ const iconMap: Record<string, ReactIconType> = {
   Python: SiPython,
   FastAPI: SiFastapi,
   Django: SiDjango,
+  'Django REST': SiDjango,
+  'Django REST Framework (DRF)': SiDjango,
   Flask: SiFlask,
   GraphQL: SiGraphql,
 
@@ -70,6 +75,10 @@ const iconMap: Record<string, ReactIconType> = {
   'Scikit-learn': SiScikitlearn,
   'OpenAI API': SiOpenai,
   OpenAI: SiOpenai,
+  Ollama: SiOllama,
+  ShadCN: SiShadcnui,
+  'ShadCN UI': SiShadcnui,
+  RazorPay: SiRazorpay,
 
   // Tools
   Git: SiGit,
@@ -93,6 +102,8 @@ const colorMap: Record<string, string> = {
   Python: '#3776AB',
   FastAPI: '#009688',
   Django: '#092E20',
+  'Django REST': '#092E20',
+  'Django REST Framework (DRF)': '#092E20',
   Flask: '#000000',
   GraphQL: '#E10098',
 
@@ -111,6 +122,10 @@ const colorMap: Record<string, string> = {
   'Scikit-learn': '#F7931E',
   'OpenAI API': '#10A37F',
   OpenAI: '#10A37F',
+  Ollama: '#000000',
+  ShadCN: '#111111',
+  'ShadCN UI': '#111111',
+  RazorPay: '#0C2451',
 
   Git: '#F05032',
   GitHub: '#181717',

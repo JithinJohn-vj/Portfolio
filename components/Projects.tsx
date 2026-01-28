@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ExternalLink, Github } from 'lucide-react'
 import Image from 'next/image'
+import { TechBadge } from './TechBadge'
 
 const projects = [
   {
@@ -83,12 +84,11 @@ export default function Projects() {
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech) => (
-                    <span
+                    <TechBadge
                       key={tech}
-                      className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-xs font-medium"
-                    >
-                      {tech}
-                    </span>
+                      label={tech}
+                      className="bg-primary-50 dark:bg-primary-900/40 border-primary-100 dark:border-primary-900 text-primary-800 dark:text-primary-200"
+                    />
                   ))}
                 </div>
                 <div className="flex gap-4">
