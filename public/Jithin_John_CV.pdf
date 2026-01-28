@@ -1,0 +1,109 @@
+%PDF-1.4
+%����
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 5 0 R ] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 2573 >>
+stream
+BT
+/F1 11 Tf
+54 738 Td
+(Jithin John — Full Stack Developer) Tj
+0 -14 Td
+(Gothenburg, Sweden | jithinjohnptr@gmail.com | +46 793493589) Tj
+0 -14 Td
+(LinkedIn: linkedin.com/in/jithin-john-dev | GitHub: github.com/JithinJohn-vj) Tj
+0 -14 Td
+0 -14 Td
+(PROFESSIONAL SUMMARY) Tj
+0 -14 Td
+(Versatile Full Stack Developer with 4+ years of experience building robust and scalable web) Tj
+0 -14 Td
+(applications. Strong in Python \(Django/FastAPI\) for backend development and React/Next.js) Tj
+0 -14 Td
+(for modern frontend experiences. Experienced with Docker, Kubernetes, GCP, and Terraform for) Tj
+0 -14 Td
+(cloud-native deployments.) Tj
+0 -14 Td
+0 -14 Td
+(TECHNICAL SKILLS) Tj
+0 -14 Td
+(- Python, Django, FastAPI, Flask) Tj
+0 -14 Td
+(- React, Next.js, TypeScript, JavaScript) Tj
+0 -14 Td
+(- REST APIs, Auth \(JWT/OAuth\), GraphQL \(basic\)) Tj
+0 -14 Td
+(- PostgreSQL, MongoDB, MySQL, SQLite) Tj
+0 -14 Td
+(- Docker, Kubernetes, GCP, AWS, Terraform, GitHub Actions) Tj
+0 -14 Td
+0 -14 Td
+(EXPERIENCE) Tj
+0 -14 Td
+(Fullstack Developer — Readymade AB \(Skene, Sweden\) | Sep 2025 – Present) Tj
+0 -14 Td
+(  • Built and maintained responsive web applications with React and Next.js.) Tj
+0 -14 Td
+(  • Developed backend services and REST APIs using Python/Django.) Tj
+0 -14 Td
+(  • Improved performance with caching strategies, lazy loading, and Core Web Vitals) Tj
+0 -14 Td
+(optimizations.) Tj
+0 -14 Td
+(  • Set up CI/CD pipelines with GitHub Actions to automate lint/test/build and deployments.) Tj
+0 -14 Td
+0 -14 Td
+(Fullstack Developer — LymData Labs Pvt. Ltd. \(Remote\) | Apr 2024 – Mar 2025) Tj
+0 -14 Td
+(  • Designed UIs using React and Next.js; built SSR/SSG pages for SEO and performance.) Tj
+0 -14 Td
+(  • Integrated REST APIs using FastAPI and Django.) Tj
+0 -14 Td
+(  • Implemented microservices with Docker/Kubernetes; deployed on GCP; IaC with Terraform.) Tj
+0 -14 Td
+0 -14 Td
+(Fullstack Developer — Softroniics Solutions \(Calicut, India\) | Jul 2023 – Mar 2024) Tj
+0 -14 Td
+(  • Built e-commerce features with Django/FastAPI backend and React/Next.js frontend.) Tj
+0 -14 Td
+(  • Implemented secure auth \(JWT/OAuth\) and optimized PostgreSQL/MongoDB queries.) Tj
+0 -14 Td
+0 -14 Td
+(EDUCATION) Tj
+0 -14 Td
+(- Halmstad University, Sweden — Information Technology | 2021 – 2023) Tj
+0 -14 Td
+(- University of Calicut, India — Master of Computer Applications \(MCA\) | 2016 – 2019) Tj
+0 -14 Td
+(- University of Calicut, India — Bachelor of Computer Science \(BSc\) | 2013 – 2016) Tj
+0 -14 Td
+0 -14 Td
+(Generated: 2026-01-28) Tj
+ET
+
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000123 00000 n 
+0000000193 00000 n 
+0000002818 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2944
+%%EOF
