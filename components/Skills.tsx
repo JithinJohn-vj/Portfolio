@@ -1,6 +1,74 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { Code2 } from 'lucide-react'
+import type { ComponentType } from 'react'
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiJavascript,
+  SiTailwindcss,
+  SiPython,
+  SiFastapi,
+  SiDjango,
+  SiFlask,
+  SiGraphql,
+  SiDocker,
+  SiKubernetes,
+  SiGooglecloud,
+  SiAmazonwebservices,
+  SiTerraform,
+  SiGithubactions,
+  SiPostgresql,
+  SiMongodb,
+  SiMysql,
+  SiSqlite,
+  SiScikitlearn,
+  SiOpenai,
+  SiGit,
+  SiJest,
+  SiLinux,
+  SiFigma,
+  SiVscodium,
+} from 'react-icons/si'
+
+type IconType = ComponentType<{ className?: string }>
+
+const skillIconMap: Record<string, IconType> = {
+  'React.js': SiReact,
+  'Next.js': SiNextdotjs,
+  TypeScript: SiTypescript,
+  JavaScript: SiJavascript,
+  'Tailwind CSS': SiTailwindcss,
+
+  Python: SiPython,
+  FastAPI: SiFastapi,
+  Django: SiDjango,
+  Flask: SiFlask,
+  GraphQL: SiGraphql,
+
+  Docker: SiDocker,
+  Kubernetes: SiKubernetes,
+  GCP: SiGooglecloud,
+  AWS: SiAmazonwebservices,
+  Terraform: SiTerraform,
+  'GitHub Actions': SiGithubactions,
+
+  PostgreSQL: SiPostgresql,
+  MongoDB: SiMongodb,
+  MySQL: SiMysql,
+  SQLite: SiSqlite,
+
+  'Scikit-learn': SiScikitlearn,
+  'OpenAI API': SiOpenai,
+
+  'Git/GitHub': SiGit,
+  'Testing (Jest)': SiJest,
+  'Linux/CLI': SiLinux,
+  'Figma (handoff)': SiFigma,
+  VSCode: SiVscodium,
+}
 
 const skillCategories = [
   {
@@ -107,8 +175,15 @@ export default function Skills() {
                 {category.skills.map((skill, skillIndex) => (
                   <div key={skill.name}>
                     <div className="flex justify-between mb-2">
-                      <span className="text-gray-700 dark:text-gray-300 font-medium">
-                        {skill.name}
+                      <span className="text-gray-700 dark:text-gray-300 font-medium flex items-center gap-2 min-w-0">
+                        <span className="w-5 h-5 flex items-center justify-center shrink-0 text-gray-600 dark:text-gray-300">
+                          {(() => {
+                            const Icon = skillIconMap[skill.name]
+                            if (!Icon) return <Code2 className="w-4 h-4" aria-hidden="true" />
+                            return <Icon className="w-4 h-4" aria-hidden="true" />
+                          })()}
+                        </span>
+                        <span className="truncate">{skill.name}</span>
                       </span>
                       <span className="text-gray-500 dark:text-gray-400 text-sm">
                         {skill.level}%
