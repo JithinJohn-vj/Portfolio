@@ -5,14 +5,6 @@ import { GraduationCap, Calendar, MapPin } from 'lucide-react'
 
 const education = [
   {
-    degree: 'Information Technology',
-    status: 'Incomplete',
-    institution: 'Halmstad University',
-    location: 'Sweden',
-    period: '2021 – 2023',
-    description: 'Pursued advanced studies in Information Technology with focus on modern software development practices.',
-  },
-  {
     degree: 'Master of Computer Applications (MCA)',
     status: 'Completed',
     institution: 'University of Calicut',

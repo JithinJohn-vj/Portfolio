@@ -61,8 +61,8 @@ export default function Navigation() {
                 </a>
               ))}
               <a
-                href="/Jithin_John_CV.pdf"
-                download="Jithin_John_CV.pdf"
+                href="/Jithin_Fullstack_Cv.pdf"
+                download="Jithin_Fullstack_Cv.pdf"
                 className="ml-4 px-4 py-2 bg-primary-600 text-white rounded-md text-sm font-medium hover:bg-primary-700 transition-colors flex items-center gap-2"
               >
                 <Download className="w-4 h-4" />
@@ -124,8 +124,8 @@ export default function Navigation() {
               </a>
             ))}
             <a
-              href="/Jithin_John_CV.pdf"
-              download="Jithin_John_CV.pdf"
+              href="/Jithin_Fullstack_Cv.pdf"
+              download="Jithin_Fullstack_Cv.pdf"
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-2 mx-3 px-4 py-2 bg-primary-600 text-white rounded-md text-base font-medium hover:bg-primary-700 transition-colors flex items-center gap-2"
             >
