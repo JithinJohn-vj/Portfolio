@@ -12,7 +12,7 @@ const skillCategories = [
       { name: 'JavaScript', level: 90 },
       { name: 'Tailwind CSS', level: 90 },
       { name: 'ShadCN UI', level: 85 },
-      { name: 'WordPress + Elementor', level: 85 },
+      { name: 'Responsive UI', level: 90 },
     ],
   },
   {
@@ -62,9 +62,9 @@ const skillCategories = [
     title: 'Tools & Others',
     skills: [
       { name: 'Git/GitHub', level: 90 },
-      { name: 'PHP', level: 80 },
-      { name: 'WooCommerce', level: 85 },
-      { name: 'WP REST API', level: 85 },
+      { name: 'Testing (Jest)', level: 75 },
+      { name: 'Linux/CLI', level: 80 },
+      { name: 'Figma (handoff)', level: 75 },
       { name: 'VSCode', level: 90 },
     ],
   },
