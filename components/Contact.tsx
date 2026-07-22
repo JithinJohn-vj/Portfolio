@@ -36,8 +36,12 @@ export default function Contact() {
               jithinjohnptr@gmail.com
             </a>
             <span className="hidden sm:inline">|</span>
-            <a href="tel:+46793493589" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-              +46 793493589
+            <a href="tel:+46767517987" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+              +46 767517987
+            </a>
+            <span className="hidden sm:inline">|</span>
+            <a href="tel:+919961257012" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+              +91 9961257012
             </a>
             <span className="hidden sm:inline">|</span>
             <span>Gothenburg, Sweden</span>

@@ -178,7 +178,7 @@ def main() -> None:
     title = "Full Stack Developer"
     location = "Gothenburg, Sweden"
     email = "jithinjohnptr@gmail.com"
-    phone = "+46 793493589"
+    phone = "+46 767517987 | +91 9961257012"
     linkedin = "linkedin.com/in/jithin-john-dev"
     github = "github.com/JithinJohn-vj"
 
