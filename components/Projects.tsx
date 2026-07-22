@@ -7,6 +7,15 @@ import { TechBadge } from './TechBadge'
 
 const projects = [
   {
+    title: 'Devfio — AI Portfolio Builder Platform',
+    description:
+      'Co-founded and built an AI-powered freemium SaaS platform enabling professionals across IT, healthcare, engineering, and finance to create, publish, and share portfolio profiles. Includes subdomain hosting, an in-platform resume builder, AI cover letter generator, ATS checker, Job Hub, and real-time recruiter messaging.',
+    technologies: ['Next.js', 'Django REST', 'PostgreSQL', 'Docker', 'GitHub Actions', 'WebSockets', 'JWT', 'OpenAI'],
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80',
+    github: 'https://github.com/JithinJohn-vj',
+    live: 'https://www.devfio.com',
+  },
+  {
     title: 'AI-Powered Quote Automation System',
     description:
       'Production-ready AI-powered platform to automate quotation generation and predict pricing based on input data. Integrates modern frontend with backend AI/ML models for real-time, accurate quotes.',
