@@ -9,7 +9,7 @@ const experiences = [
     company: 'Readymade AB',
     location: 'Skene, Sweden',
     position: 'Fullstack Developer',
-    period: 'September 2025 – Present',
+    period: 'September 2025 – March 2026',
     type: 'Onsite',
     description: [
       'Built and maintained responsive web applications with React and Next.js, focusing on clean UI, performance, and accessibility.',

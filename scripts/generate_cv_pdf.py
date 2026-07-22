@@ -197,7 +197,7 @@ def main() -> None:
     ]
 
     experience = [
-        ("Fullstack Developer — Readymade AB (Skene, Sweden) | Sep 2025 – Present",
+        ("Fullstack Developer — Readymade AB (Skene, Sweden) | Sep 2025 – Mar 2026",
          [
              "Built and maintained responsive web applications with React and Next.js.",
              "Developed backend services and REST APIs using Python/Django.",
