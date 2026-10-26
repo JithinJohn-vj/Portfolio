@@ -54,6 +54,8 @@ const iconMap: Record<string, ReactIconType> = {
   Django: SiDjango,
   'Django REST': SiDjango,
   'Django REST Framework (DRF)': SiDjango,
+  'Django REST Framework': SiDjango,
+  'Django Channels': SiDjango,
   Flask: SiFlask,
   GraphQL: SiGraphql,
 
@@ -104,6 +106,8 @@ const colorMap: Record<string, string> = {
   Django: '#092E20',
   'Django REST': '#092E20',
   'Django REST Framework (DRF)': '#092E20',
+  'Django REST Framework': '#092E20',
+  'Django Channels': '#092E20',
   Flask: '#000000',
   GraphQL: '#E10098',
 
