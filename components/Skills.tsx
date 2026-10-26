@@ -1,162 +1,86 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { TechBadge } from './TechBadge'
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Code2 } from 'lucide-react'
+import { skillCategories, skills, type SkillCategory } from '@/lib/data'
+import { getTech } from '@/lib/tech'
+import SectionHeading from './SectionHeading'
 
-const skillCategories = [
-  {
-    title: 'Frontend Development',
-    skills: [
-      { name: 'React.js', level: 90 },
-      { name: 'Next.js', level: 90 },
-      { name: 'TypeScript', level: 85 },
-      { name: 'JavaScript', level: 90 },
-      { name: 'Tailwind CSS', level: 90 },
-      { name: 'ShadCN UI', level: 85 },
-      { name: 'Responsive UI', level: 90 },
-    ],
-  },
-  {
-    title: 'Backend Development',
-    skills: [
-      { name: 'Python', level: 90 },
-      { name: 'FastAPI', level: 90 },
-      { name: 'Django', level: 90 },
-      { name: 'Flask', level: 80 },
-      { name: 'RESTful APIs', level: 90 },
-      { name: 'GraphQL', level: 75 },
-      { name: 'JWT & OAuth', level: 85 },
-    ],
-  },
-  {
-    title: 'Cloud & DevOps',
-    skills: [
-      { name: 'Docker', level: 85 },
-      { name: 'Kubernetes', level: 80 },
-      { name: 'GCP', level: 85 },
-      { name: 'AWS', level: 75 },
-      { name: 'Terraform', level: 80 },
-      { name: 'GitHub Actions', level: 85 },
-      { name: 'CI/CD', level: 85 },
-    ],
-  },
-  {
-    title: 'Databases',
-    skills: [
-      { name: 'PostgreSQL', level: 85 },
-      { name: 'MongoDB', level: 85 },
-      { name: 'MySQL', level: 80 },
-      { name: 'SQLite', level: 75 },
-      { name: 'Query Optimization', level: 85 },
-    ],
-  },
-  {
-    title: 'AI & Machine Learning',
-    skills: [
-      { name: 'Scikit-learn', level: 75 },
-      { name: 'Ollama (LLM)', level: 80 },
-      { name: 'OpenAI API', level: 85 },
-      { name: 'ML Integration', level: 80 },
-    ],
-  },
-  {
-    title: 'Tools & Others',
-    skills: [
-      { name: 'Git/GitHub', level: 90 },
-      { name: 'Testing (Jest)', level: 75 },
-      { name: 'Linux/CLI', level: 80 },
-      { name: 'Figma (handoff)', level: 75 },
-      { name: 'VSCode', level: 90 },
-    ],
-  },
-]
+type Filter = 'All' | SkillCategory
 
 export default function Skills() {
+  const [filter, setFilter] = useState<Filter>('All')
+  const visible = filter === 'All' ? skills : skills.filter((skill) => skill.category === filter)
+
   return (
-    <section
-      id="skills"
-      className="py-20 bg-gray-50 dark:bg-gray-900"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-            Skills & Technologies
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-primary-400 mx-auto"></div>
-        </motion.div>
+    <section id="skills" className="relative py-24">
+      <div className="pointer-events-none absolute left-1/2 top-1/3 h-96 w-[700px] -translate-x-1/2 rounded-full bg-primary-700/10 blur-[120px]" />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
-              className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-end justify-between gap-6">
+          <SectionHeading eyebrow="My Skills" pill="Technologies I work with" title="Tools & Technologies" />
+          <p className="hidden rotate-[-6deg] font-script text-2xl leading-tight text-primary-300 md:block">
+            Hover to explore
+            <br />
+            my skills ↓
+          </p>
+        </div>
+
+        <div className="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Filter skills">
+          {(['All', ...skillCategories] as Filter[]).map((category) => (
+            <button
+              key={category}
+              role="tab"
+              aria-selected={filter === category}
+              onClick={() => setFilter(category)}
+              className={`relative rounded-full px-5 py-2 text-sm font-medium transition-colors ${
+                filter === category ? 'text-white' : 'text-slate-400 hover:text-white'
+              }`}
             >
-              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                {category.title}
-              </h3>
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between mb-2">
-                      <TechBadge
-                        label={skill.name}
-                        className="bg-transparent dark:bg-transparent border-0 px-0 py-0 text-sm font-medium"
-                      />
-                      <span className="text-gray-500 dark:text-gray-400 text-sm">
-                        {skill.level}%
-                      </span>
-                    </div>
-                    <div className="relative">
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          viewport={{ once: true }}
-                          transition={{
-                            duration: 0.9,
-                            ease: 'easeOut',
-                            delay: categoryIndex * 0.18 + skillIndex * 0.08,
-                          }}
-                          className="h-2.5 rounded-full bg-gradient-to-r from-primary-600 to-primary-400"
-                        />
-                      </div>
-
-                      {/* indicator dot */}
-                      <motion.div
-                        initial={{ left: '0%' }}
-                        whileInView={{ left: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{
-                          duration: 0.9,
-                          ease: 'easeOut',
-                          delay: categoryIndex * 0.18 + skillIndex * 0.08,
-                        }}
-                        className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
-                        style={{ pointerEvents: 'none' }}
-                      >
-                        <div className="w-3.5 h-3.5 rounded-full bg-white dark:bg-gray-900 shadow-[0_0_0_2px_rgba(59,130,246,0.35)]">
-                          <div className="w-full h-full rounded-full bg-gradient-to-r from-primary-600 to-primary-400 scale-[0.55]" />
-                        </div>
-                      </motion.div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+              {filter === category && (
+                <motion.span
+                  layoutId="skill-filter"
+                  className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-600 to-primary-500 shadow-glow"
+                  transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                />
+              )}
+              <span className="relative">{category}</span>
+            </button>
           ))}
         </div>
+
+        <motion.div layout className="mt-8 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
+          <AnimatePresence mode="popLayout">
+            {visible.map((skill) => {
+              const tech = getTech(skill.name)
+              const Icon = tech?.icon
+              return (
+                <motion.div
+                  key={skill.name}
+                  layout
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.85 }}
+                  transition={{ duration: 0.25 }}
+                  className="glass glass-hover group flex h-24 flex-col items-center justify-center gap-2.5 p-2 text-center"
+                >
+                  {Icon ? (
+                    <Icon
+                      className="h-8 w-8 transition-transform duration-300 group-hover:scale-110"
+                      color={tech.color}
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <Code2 className="h-8 w-8 text-primary-300" aria-hidden="true" />
+                  )}
+                  <span className="text-xs font-medium text-slate-300">{skill.name}</span>
+                </motion.div>
+              )
+            })}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   )
 }
-

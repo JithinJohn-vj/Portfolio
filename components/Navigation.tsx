@@ -1,141 +1,127 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Download } from 'lucide-react'
-
-const navItems = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Education', href: '#education' },
-  { name: 'Contact', href: '#contact' },
-]
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Download, Menu, X } from 'lucide-react'
+import { navItems, profile } from '@/lib/data'
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [active, setActive] = useState('#home')
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
+    const handleScroll = () => setIsScrolled(window.scrollY > 20)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`)
+        })
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    )
+    navItems.forEach((item) => {
+      const el = document.querySelector(item.href)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
   }, [])
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
+      initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg'
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        isScrolled || isMobileMenuOpen
+          ? 'border-b border-white/10 bg-navy-950/80 backdrop-blur-lg'
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0">
-            <a
-              href="#home"
-              className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent"
-            >
-              Portfolio
-            </a>
-          </div>
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <a href="#home" className="text-3xl font-extrabold text-white" aria-label="Jithin John, home">
+          J<span className="text-primary-500">.</span>
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+        <div className="hidden items-center gap-1 md:flex">
+          {navItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className={`relative px-4 py-2 text-sm font-medium transition-colors ${
+                active === item.href ? 'text-white' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              {item.name}
+              {active === item.href && (
+                <motion.span
+                  layoutId="nav-underline"
+                  className="absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-primary-500 shadow-glow"
+                />
+              )}
+            </a>
+          ))}
+        </div>
+
+        <a
+          href={profile.cv}
+          download="Jithin_John_CV.pdf"
+          className="hidden items-center gap-2 rounded-lg bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2 text-sm font-semibold text-white shadow-glow transition hover:shadow-glow-lg md:inline-flex"
+        >
+          Download CV
+          <Download className="h-4 w-4" />
+        </a>
+
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="text-slate-300 hover:text-white md:hidden"
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMobileMenuOpen}
+        >
+          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="overflow-hidden border-t border-white/10 md:hidden"
+          >
+            <div className="space-y-1 px-4 pb-4 pt-2">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block rounded-lg px-3 py-2 text-base font-medium ${
+                    active === item.href ? 'bg-primary-500/10 text-white' : 'text-slate-400 hover:text-white'
+                  }`}
                 >
                   {item.name}
                 </a>
               ))}
               <a
-                href="/Jithin_John_CV.pdf"
+                href={profile.cv}
                 download="Jithin_John_CV.pdf"
-                className="ml-4 px-4 py-2 bg-primary-600 text-white rounded-md text-sm font-medium hover:bg-primary-700 transition-colors flex items-center gap-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="btn-primary mt-2 w-full py-2.5 text-base"
               >
-                <Download className="w-4 h-4" />
-                CV PDF
+                <Download className="h-4 w-4" />
+                Download CV
               </a>
             </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 focus:outline-none"
-            >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {isMobileMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Navigation */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 block px-3 py-2 rounded-md text-base font-medium"
-              >
-                {item.name}
-              </a>
-            ))}
-            <a
-              href="/Jithin_John_CV.pdf"
-              download="Jithin_John_CV.pdf"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="mt-2 mx-3 px-4 py-2 bg-primary-600 text-white rounded-md text-base font-medium hover:bg-primary-700 transition-colors flex items-center gap-2"
-            >
-              <Download className="w-4 h-4" />
-              Download CV (PDF)
-            </a>
-          </div>
-        </motion.div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   )
 }
-

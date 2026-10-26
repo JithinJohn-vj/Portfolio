@@ -1,204 +1,249 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { MapPin, Calendar } from 'lucide-react'
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Briefcase, Calendar, GraduationCap, MapPin, Plane } from 'lucide-react'
+import { education, experiences } from '@/lib/data'
+import SectionHeading from './SectionHeading'
 import { TechBadge } from './TechBadge'
 
-type ExperienceItem = {
-  company: string
-  location: string
-  position: string
-  period: string
-  type?: string
-  summary: string
-  description: string[]
-  technologies: string[]
-}
-
-const experiences: ExperienceItem[] = [
-  {
-    company: 'DevFio',
-    location: 'Self-Initiated SaaS Product',
-    position: 'Founder & Full Stack Developer',
-    period: 'April 2026 – Present',
-    type: 'Founder',
-    summary:
-      'Built, launched, and currently maintain DevFio, an AI-powered freemium SaaS platform enabling professionals across IT, healthcare, electronics engineering, and finance to create, publish, and share portfolio profiles. Live in production at www.devfio.com.',
-    description: [
-      'Led MVP development end-to-end, from market analysis and product scoping through to production launch, and continue to own the roadmap, releases, and ongoing improvements as the founder.',
-      'Architected the full stack using Next.js (frontend) and Django REST Framework (backend) with PostgreSQL as the primary database, deployed via Docker and GitHub Actions CI/CD pipelines.',
-      "Built a portfolio template system with subdomain hosting, publishing each user's portfolio on a unique subdomain (e.g. username.devfio.com) so users get a professional web presence without any technical setup.",
-      'Developed an in-platform resume builder that generates and downloads formatted CVs directly from profile data, with field-specific templates for each professional vertical.',
-      "Integrated an AI-powered cover letter generator that parses the user's profile and a job description to produce a tailored, role-specific cover letter in seconds.",
-      'Built an AI-driven ATS checker that analyses a CV against a job description, scoring keyword alignment and suggesting targeted improvements to increase shortlisting chances.',
-      "Developed a Job Hub aggregating job listings matched to the user's profile and skills, letting users discover and apply to opportunities without leaving the platform.",
-      'Implemented real-time messaging between professionals and recruiters/employers using Django Channels and WebSockets.',
-      'Built secure JWT-based authentication with RBAC, freemium tier enforcement, and RESTful APIs powering all platform features.',
-      'Managed production deployment, hosting, maintenance, and ongoing feature development, keeping the platform live at www.devfio.com.',
-    ],
-    technologies: ['Next.js', 'React', 'Django REST Framework', 'PostgreSQL', 'Django Channels', 'WebSockets', 'AI/LLM', 'Docker', 'GitHub Actions'],
-  },
-  {
-    company: 'Readymade AB',
-    location: 'Sweden',
-    position: 'Full Stack Developer',
-    period: 'September 2025 – March 2026',
-    type: 'Onsite',
-    summary:
-      'Responsible for building and maintaining company websites and internal business platforms, owning the full stack from UI to database with a focus on performance, security, and code quality.',
-    description: [
-      'Built and maintained scalable web platforms using Next.js 14 and React, implementing component-level code splitting and lazy loading to meet Core Web Vitals targets.',
-      'Developed SSR and SSG pages with Next.js to improve SEO and reduce initial load times across all products.',
-      'Engineered RESTful backend APIs using Django (Python), structuring endpoints with clear validation and error handling.',
-      'Designed and maintained PostgreSQL schemas with ACID-compliant transactions, optimised queries, and targeted indexing to avoid slow full-table scans.',
-      'Implemented enterprise-grade authentication using JWT and OAuth 2.0, including RBAC and session management across multiple services.',
-      'Applied React/Next.js security best practices to prevent XSS, CSRF, and data exposure vulnerabilities.',
-      'Built reusable TypeScript and Tailwind CSS component libraries, establishing shared design tokens to maintain visual consistency across teams.',
-      'Monitored production health using structured logging and performance profiling tools, triaging incidents to maintain service reliability.',
-    ],
-    technologies: ['Next.js', 'React', 'TypeScript', 'Python', 'Django', 'PostgreSQL'],
-  },
-  {
-    company: 'Silvis AB',
-    location: 'Göteborg, Sweden',
-    position: 'Web Developer',
-    period: 'September 2024 – August 2025',
-    summary:
-      'Maintained and updated the company website, built and launched the new website for Meze Street (mezestreet.se), part of the Silvis business, and developed internal employee-management systems to support staff administration and day-to-day operations.',
-    description: [
-      'Maintained and regularly updated the company website, including content, features, and design improvements.',
-      'Designed, built, and launched the new website for Meze Street (mezestreet.se), part of the Silvis business, using Next.js, React, and ShadCN UI, and continue to maintain and update it.',
-      'Built responsive, mobile-friendly pages with React, HTML, and CSS, keeping a consistent brand look across the Silvis websites.',
-      'Developed internal employee-management features with Python and Django for staff records, attendance, scheduling, and administrative workflows.',
-      'Built Django backend APIs connecting the internal systems to Next.js frontends, with role-based access for management and staff.',
-      'Deployed and hosted the websites and internal systems on Google Cloud Platform, managing environments and releases.',
-      'Set up CI/CD pipelines with GitHub to automate builds and deployments, and managed version control and code reviews on GitHub.',
-      'Improved website security, performance, and functionality while troubleshooting and resolving technical issues.',
-      'Implemented website enhancements based on business requirements and management feedback.',
-      'Collaborated with management to understand requirements and deliver practical technical solutions.',
-      'Provided ongoing technical support for the websites and internal systems.',
-    ],
-    technologies: ['Next.js', 'React', 'ShadCN UI', 'HTML', 'CSS', 'Python', 'Django', 'CI/CD', 'GitHub', 'GCP'],
-  },
-  {
-    company: 'LymData Labs Pvt. Ltd.',
-    location: 'Kerala, India',
-    position: 'Full Stack Developer',
-    period: 'July 2023 – September 2024',
-    type: 'Remote',
-    summary:
-      'Worked as a full stack engineer on a cloud-native product team, responsible for frontend delivery and backend API development, while leading infrastructure and DevOps initiatives on GCP.',
-    description: [
-      'Designed responsive UI components using React and Next.js with Tailwind CSS and ShadCN UI, ensuring cross-browser compatibility and accessibility compliance.',
-      'Built and maintained RESTful APIs with FastAPI (Python), integrating Pydantic validation and structured logging to improve reliability and debuggability.',
-      'Architected microservice infrastructure on GCP using Docker and Kubernetes, enabling horizontal scalability and zero-downtime deployments.',
-      'Led Infrastructure as Code using Terraform to automate provisioning of GCP resources including Cloud Run, Cloud SQL, and VPC networking.',
-      'Established CI/CD pipelines with GitHub Actions, automating tests and deployments to GCP staging and production environments.',
-      'Integrated Django backend services with React frontends via REST APIs, using JWT for secure stateless authentication across microservices.',
-      "Improved API reliability with automated smoke tests and request/response validation using FastAPI's Pydantic models.",
-    ],
-    technologies: ['React', 'Next.js', 'FastAPI', 'Django', 'Kubernetes', 'GCP', 'Terraform'],
-  },
-  {
-    company: 'Softroniics Solutions',
-    location: 'Palakkad, Kerala, India',
-    position: 'Junior Full Stack Developer',
-    period: 'December 2019 – December 2021',
-    summary:
-      'Contributed to internal web products including an Inventory Management System, a CRM platform, and a secure e-voting system, working across frontend, backend, and cloud infrastructure under senior guidance.',
-    description: [
-      'Built dynamic, responsive frontend interfaces using React.js and TypeScript, implementing reusable UI patterns and improving accessibility across core pages.',
-      'Developed CRUD-heavy features for an Inventory Management System and CRM using React and Django REST Framework, connected via REST APIs.',
-      'Engineered a secure e-voting system in React and Django with real-time vote encryption, tamper-proof integrity checks, and duplicate vote prevention client- and server-side.',
-      'Built React admin dashboards for election management covering election setup, voter list management, and live turnout reporting via Django REST endpoints.',
-      'Integrated FastAPI services for performance-sensitive endpoints, using Pydantic models for strict request validation.',
-      'Provisioned AWS infrastructure using Terraform, creating EC2 instances, S3 buckets, and configuring IAM roles for application-level access control.',
-      'Supported GCP deployments using Docker to containerise Django and FastAPI services for consistent staging and production parity.',
-    ],
-    technologies: ['React', 'Django REST Framework', 'FastAPI', 'PostgreSQL', 'MongoDB', 'AWS', 'GCP'],
-  },
+// Node positions on the journey scene, in % of its width/height (oldest → newest).
+const nodes = [
+  { x: 8, y: 80 },
+  { x: 29, y: 68 },
+  { x: 50, y: 60 },
+  { x: 71, y: 48 },
+  { x: 91, y: 36 },
 ]
 
+// Catmull-Rom spline through the nodes, in a 1000×100 viewBox.
+function journeyPath() {
+  const pts = [{ x: 0, y: 88 }, ...nodes, { x: 100, y: 30 }].map((p) => ({ x: p.x * 10, y: p.y }))
+  let d = `M${pts[0].x},${pts[0].y}`
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] ?? pts[i]
+    const p1 = pts[i]
+    const p2 = pts[i + 1]
+    const p3 = pts[i + 2] ?? p2
+    const c1 = { x: p1.x + (p2.x - p0.x) / 6, y: p1.y + (p2.y - p0.y) / 6 }
+    const c2 = { x: p2.x - (p3.x - p1.x) / 6, y: p2.y - (p3.y - p1.y) / 6 }
+    d += ` C${c1.x},${c1.y} ${c2.x},${c2.y} ${p2.x},${p2.y}`
+  }
+  return d
+}
+
+const path = journeyPath()
+
+function labelTransform(index: number) {
+  if (index === 0) return 'translate(-14px, calc(-100% - 20px))'
+  if (index === nodes.length - 1) return 'translate(calc(-100% + 14px), calc(-100% - 20px))'
+  return 'translate(-50%, calc(-100% - 20px))'
+}
+
 export default function Experience() {
+  const [selected, setSelected] = useState(experiences.length - 1)
+  const exp = experiences[selected]
+
   return (
-    <section
-      id="experience"
-      className="py-20 bg-white dark:bg-gray-800"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-            Work Experience
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-primary-400 mx-auto"></div>
-        </motion.div>
+    <section id="experience" className="relative py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading eyebrow="My Journey" pill="Where I've worked" title="Professional Experience" />
+        <p className="mt-3 text-sm text-slate-400">Select a stop on the journey to see the details.</p>
 
-        <div className="space-y-8">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={`${exp.company}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="bg-gray-50 dark:bg-gray-900 rounded-xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow"
-            >
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                    {exp.position}
-                  </h3>
-                  <div className="flex flex-wrap items-center gap-3 text-lg text-primary-600 dark:text-primary-400 font-semibold mb-2">
-                    <span>{exp.company}</span>
-                    <span className="text-gray-400">•</span>
-                    <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-                      <MapPin className="w-4 h-4" />
-                      <span>{exp.location}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col items-start md:items-end gap-2">
-                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-                    <Calendar className="w-4 h-4" />
-                    <span className="text-sm font-medium">{exp.period}</span>
-                  </div>
-                  {exp.type && (
-                    <span className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-xs font-medium">
-                      {exp.type}
-                    </span>
-                  )}
-                </div>
-              </div>
+        {/* Journey scene (md and up) */}
+        <div className="relative mt-10 hidden h-[400px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-navy-900 to-navy-950 md:block">
+          <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="mountain-back" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#14214a" />
+                <stop offset="100%" stopColor="#060d22" />
+              </linearGradient>
+              <linearGradient id="mountain-front" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#0b1530" />
+                <stop offset="100%" stopColor="#030816" />
+              </linearGradient>
+              <linearGradient id="journey-line" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#1d4ed8" />
+                <stop offset="50%" stopColor="#60a5fa" />
+                <stop offset="100%" stopColor="#93c5fd" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0 68 L60 52 L120 60 L200 38 L280 54 L360 30 L440 50 L520 28 L600 46 L680 22 L760 40 L840 18 L920 36 L1000 24 L1000 100 L0 100Z"
+              fill="url(#mountain-back)"
+              opacity="0.8"
+            />
+            <path
+              d="M0 86 L90 72 L170 80 L260 66 L350 77 L450 62 L540 73 L640 57 L740 67 L840 52 L930 61 L1000 54 L1000 100 L0 100Z"
+              fill="url(#mountain-front)"
+            />
+            <path d={path} fill="none" stroke="#3b82f6" strokeWidth="10" strokeOpacity="0.18" vectorEffect="non-scaling-stroke" />
+            <path d={path} fill="none" stroke="url(#journey-line)" strokeWidth="3" vectorEffect="non-scaling-stroke" />
+          </svg>
 
-              <p className="text-gray-700 dark:text-gray-200 mb-4 leading-relaxed">
-                {exp.summary}
-              </p>
+          <motion.div
+            className="absolute text-primary-200 drop-shadow-[0_0_10px_rgba(147,197,253,0.9)]"
+            style={{ left: '39%', top: '44%' }}
+            animate={{ y: [0, -8, 0], x: [0, 6, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            aria-hidden="true"
+          >
+            <Plane className="h-7 w-7" />
+          </motion.div>
 
-              <ul className="space-y-2 mb-4">
-                {exp.description.map((item, idx) => (
-                  <li key={idx} className="text-gray-600 dark:text-gray-300 flex items-start">
-                    <span className="text-primary-600 dark:text-primary-400 mr-2 mt-1.5">•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-                {exp.technologies.map((tech) => (
-                  <TechBadge
-                    key={tech}
-                    label={tech}
+          {experiences.map((item, index) => {
+            const node = nodes[index]
+            const isActive = index === selected
+            return (
+              <div key={item.company + item.short}>
+                <button
+                  onClick={() => setSelected(index)}
+                  aria-pressed={isActive}
+                  aria-label={`${item.position} at ${item.company}, ${item.period}`}
+                  className="absolute z-10 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full"
+                  style={{ left: `${node.x}%`, top: `${node.y}%` }}
+                >
+                  <span
+                    className={`absolute inset-0 rounded-full transition ${
+                      isActive ? 'animate-ping bg-emerald-400/40' : 'bg-primary-500/20'
+                    }`}
                   />
-                ))}
+                  <span
+                    className={`relative h-4 w-4 rounded-full border-2 border-white transition ${
+                      isActive
+                        ? 'scale-125 bg-emerald-400 shadow-[0_0_16px_4px_rgba(52,211,153,0.6)]'
+                        : 'bg-primary-500 shadow-glow'
+                    }`}
+                  />
+                </button>
+                <button
+                  onClick={() => setSelected(index)}
+                  tabIndex={-1}
+                  className={`absolute w-44 text-left transition ${index === nodes.length - 1 ? 'text-right' : ''} ${
+                    isActive ? 'opacity-100' : 'opacity-70 hover:opacity-100'
+                  }`}
+                  style={{ left: `${node.x}%`, top: `${node.y}%`, transform: labelTransform(index) }}
+                >
+                  <span className={`block text-xs ${isActive ? 'text-emerald-300' : 'text-primary-300'}`}>{item.short}</span>
+                  <span className="block text-sm font-bold leading-snug text-white">{item.company}</span>
+                  <span className="block text-xs text-slate-400">{item.position}</span>
+                  <span className={`mt-0.5 flex items-center gap-1 text-xs text-slate-500 ${index === nodes.length - 1 ? 'justify-end' : ''}`}>
+                    <MapPin className="h-3 w-3" />
+                    {item.location}
+                  </span>
+                </button>
               </div>
-            </motion.div>
+            )
+          })}
+
+          <div className="glass absolute bottom-5 right-5 flex items-center gap-3 bg-navy-900/70 px-4 py-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500/15">
+              <Briefcase className="h-5 w-5 text-primary-300" />
+            </span>
+            <div className="text-sm leading-tight">
+              <p className="font-semibold text-white">4+ Years of Experience</p>
+              <p className="text-primary-300">Across India and Sweden</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Stop picker (mobile) */}
+        <div className="mt-8 flex gap-2 overflow-x-auto pb-2 md:hidden">
+          {experiences.map((item, index) => (
+            <button
+              key={item.company + item.short}
+              onClick={() => setSelected(index)}
+              aria-pressed={index === selected}
+              className={`shrink-0 rounded-xl border px-4 py-2 text-left text-xs transition ${
+                index === selected
+                  ? 'border-primary-500 bg-primary-500/15 text-white shadow-glow'
+                  : 'border-white/10 bg-white/[0.03] text-slate-400'
+              }`}
+            >
+              <span className="block text-primary-300">{item.short}</span>
+              <span className="block font-semibold">{item.company}</span>
+            </button>
           ))}
+        </div>
+
+        {/* Details for the selected stop */}
+        <AnimatePresence mode="wait">
+          <motion.article
+            key={selected}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.3 }}
+            className="glass mt-6 p-6 md:p-8"
+          >
+            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+              <div>
+                <h3 className="text-2xl font-bold text-white">{exp.position}</h3>
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-primary-300">
+                  <span className="text-lg font-semibold">{exp.company}</span>
+                  <span className="text-slate-600">•</span>
+                  <span className="flex items-center gap-1 text-sm text-slate-400">
+                    <MapPin className="h-4 w-4" />
+                    {exp.location}
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-row items-center gap-3 md:flex-col md:items-end">
+                <span className="flex items-center gap-2 text-sm font-medium text-slate-300">
+                  <Calendar className="h-4 w-4" />
+                  {exp.period}
+                </span>
+                {exp.type && (
+                  <span className="rounded-full border border-primary-500/40 bg-primary-500/10 px-3 py-0.5 text-xs font-medium text-primary-200">
+                    {exp.type}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <p className="mt-5 leading-relaxed text-slate-300">{exp.summary}</p>
+
+            <ul className="mt-5 grid gap-x-8 gap-y-2.5 lg:grid-cols-2">
+              {exp.description.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-400">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-400 shadow-glow" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-5">
+              {exp.technologies.map((tech) => (
+                <TechBadge key={tech} label={tech} />
+              ))}
+            </div>
+          </motion.article>
+        </AnimatePresence>
+
+        {/* Education */}
+        <div className="mt-14">
+          <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-primary-400">
+            <GraduationCap className="h-4 w-4" />
+            Education
+          </h3>
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
+            {education.map((edu, index) => (
+              <motion.div
+                key={edu.degree}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="glass glass-hover p-5"
+              >
+                <p className="text-xs text-primary-300">{edu.period}</p>
+                <p className="mt-1 font-semibold text-white">{edu.degree}</p>
+                <p className="mt-1 text-sm text-slate-400">
+                  {edu.institution} · {edu.location}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
