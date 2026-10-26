@@ -45,7 +45,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-2"
           >
-            Python, FastAPI, Django, React, Next.js | Gothenburg, Sweden
+            Python, FastAPI, Django, React, Next.js | Kerala, India
           </motion.p>
 
           <motion.p

@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Portfolio | Jithin John - Full Stack Developer',
-  description: 'Portfolio of Jithin John - Full Stack Developer with 4+ years of experience in Python, FastAPI, Django, React, Next.js, and cloud technologies. Based in Gothenburg, Sweden.',
+  description: 'Portfolio of Jithin John - Full Stack Developer with 4+ years of experience in Python, FastAPI, Django, React, Next.js, and cloud technologies. Based in Kerala, India.',
 }
 
 export default function RootLayout({
